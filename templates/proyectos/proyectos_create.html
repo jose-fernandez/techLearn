@@ -1,0 +1,58 @@
+{% extends "principal.html" %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-3">
+            <div class="panel panel-secondary">
+                <div class="panel-heading">
+                    <i class="fa fa-plus fa-fw"></i> {% trans 'New Didactic Sequence' %}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="form-signin" action="{% url 'proyecto_create' %}" method="post"
+                                  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ proyectoform | bootstrap }}
+                                <div style="text-align: center" class="center-align media">
+                                    <video src="/{{ proyecto.media.url }}" class="video" preload="auto" controls
+                                           data-setup='{}'
+                                           style="max-width: 70%;height: auto;">
+                                    </video>
+                                </div>
+                                <button id="submit" name="submit" class="btn btn-primary" type="submit" value="siguiente">{% trans 'Next' %}<i class="fa fa-arrow-right fa-fw"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("label[for='id_nombre']").html('{% trans 'Didactic Sequence Name' %}');
+            $("label[for='id_descripcion']").html('{% trans 'Description' %}');
+            $("label[for='id_transcripcion']").html('{% trans 'Transcription/Text' %}');
+            $("label[for='id_idioma']").html('{% trans 'Language' %}');
+            $("label[for='id_nivel']").html('{% trans 'Level' %}');
+            $("label[for='id_tema']").html('{% trans 'Category' %}');
+            $("label[for='id_urlyt']").html('{% trans 'Video URL' %}');
+
+            $("input[type=file]").change(function () {
+                var fileInput = document.getElementById('id_media');
+                var fileUrl = window.URL.createObjectURL(fileInput.files[0]);
+                $(".video").attr("src", fileUrl);
+            });
+        });
+    </script>
+
+{% endblock %}

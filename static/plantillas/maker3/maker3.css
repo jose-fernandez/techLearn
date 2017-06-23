@@ -1,0 +1,13 @@
+
+#panel div{
+    margin: 5px;
+}
+
+#panel span {
+    padding: 5px;
+    border: dashed 1px grey;
+}
+
+.form-group {
+    display: none;
+}

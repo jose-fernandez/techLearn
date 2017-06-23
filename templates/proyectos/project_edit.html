@@ -1,0 +1,82 @@
+{% extends "principal.html" %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block content %}
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-3">
+            <div class="panel panel-secondary">
+                <div class="panel-heading">
+                    <i class="fa fa-user fa-fw"></i> Edit project info.
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="form-signin" action="{% url 'proyecto_edit' proyecto.pk %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+
+                                {{ proyectoform | bootstrap }}
+
+                                <div style="text-align: center" class="center-align media">
+                                    {% if proyecto.media %}
+
+                                        {% if proyecto.media.extension == 'mp4' or proyecto.media.extension == 'ogg' or proyecto.media.extension == 'webm' %}
+                                            <video src="/{{ proyecto.media.url }}" class="video" preload="auto" controls
+                                                   data-setup='{}'
+                                                   style="max-width: 70%;height: auto;">
+                                            </video>
+                                        {% else %}
+                                            <audio controls>
+                                                <source src="/{{ proyecto.media.url }}"
+                                                        type="audio/{{ proyecto.media.extension }}">
+                                            </audio>
+                                        {% endif %}
+                                    {% else %}
+                                        <video src="" class="video" preload="auto" controls
+                                                   data-setup='{}'
+                                                   style="max-width: 70%;height: auto;">
+                                        </video>
+                                    {% endif %}
+                                </div>
+
+                                <a href="" onClick="history.go(-1);" class="btn btn-warning"><i
+                                        class="fa fa-arrow-left fa-fw"></i> Cancel</a>
+                                <button id="submit" name="submit" class="btn btn-primary" type="submit" value="Añadir">
+                                    <i class="fa fa-save fa-fw"></i> Save
+                                </button>
+                            </form>
+                        </div>
+                        <!-- /.col-lg-8 (nested) -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("label[for='id_nombre']").html('{% trans 'Sequence Name' %}');
+            $("label[for='id_descripcion']").html('{% trans 'Description' %}');
+            $("label[for='id_transcripcion']").html('{% trans 'Transcription/Text' %}');
+            $("label[for='id_idioma']").html('{% trans 'Language' %}');
+            $("label[for='id_nivel']").html('{% trans 'Level' %}');
+            $("label[for='id_tema']").html('{% trans 'Category' %}');
+
+            $("input[type=file]").change(function () {
+                var fileInput = document.getElementById('id_media');
+                var fileUrl = window.URL.createObjectURL(fileInput.files[0]);
+                $(".video").attr("src", fileUrl);
+            });
+        });
+    </script>
+
+{% endblock %}

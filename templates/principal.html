@@ -1,0 +1,225 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto TechLearn,Admin">
+    <meta name="keyword" content="Proyecto TechLearn,Admin">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}imagenes/favicon.png">
+
+    <title>TechLearn</title>
+
+    <!-- Bootstrap CSS -->
+
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/animate.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/checkbox3.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}flat_admin/css/style.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}flat_admin/css/themes/flat-blue.css" rel="stylesheet">
+
+
+    {% block extracss %}
+    {% endblock %}
+</head>
+
+<body class="flat-blue">
+<div class="app-container">
+    <div class="row content-container">
+
+        <!--header start-->
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-top">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-expand-toggle">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ol id="bread" class="breadcrumb navbar-breadcrumb">
+                        <li>{% trans "Start" %}</li>
+                    </ol>
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                        <i class="fa fa-th icon"></i>
+                    </button>
+
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                        <i class="fa fa-times icon"></i>
+                    </button>
+                    
+                    
+                    <li class="dropdown profile">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><img src="{{ STATIC_URL }}imagenes/noavatar.png" class="mini-image">&nbsp;{{ user.first_name }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu animated fadeInDown">
+                            <li class="profile-img">
+                                <img src="{{ STATIC_URL }}imagenes/noavatar.png" class="profile-img">
+                            </li>
+                            <li>
+                                <div class="profile-info">
+                                    <h4 class="username">{{ user.first_name }}</h4>
+                                    <p>{{ user.mail }}</p>
+                                    <div class="btn-group margin-bottom-2x" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <a href="{% url 'logout' %}">
+                                                <i class="fa fa-sign-out"></i>
+                                                {% trans 'Logout' %}
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--header end-->
+
+        <!--sidebar start-->
+        <div class="side-menu sidebar-inverse">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="sid e-menu-container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'inicio' %}">
+                            <div class="icon fa fa-paper-plane"></div>
+                            <div class="title">TechLEarn</div>
+                        </a>
+                        <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                            <i class="fa fa-times icon"></i>
+                        </button>
+                    </div>
+                    <ul class="nav navbar-nav">
+
+                        <li id="units" class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#dropdown-unit" class="collapsed" aria-expanded="false">
+                                <span class="icon fa fa-bookmark"></span><span
+                                    class="title">{% trans 'Didactic Sequences' %}</span>
+                            </a>
+                            <div id="dropdown-unit" class="panel-collapse collapse" aria-expanded="false"
+                                 style="height: 0px;">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li>
+                                            <a href="{% url 'proyecto_list' %}"><span
+                                                    class="icon fa fa-list"></span><span
+                                                    class="title">{% trans 'My Didactic Sequences' %}</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'proyecto_create' %}"><span
+                                                    class="icon fa fa-plus-square"></span><span
+                                                    class="title">{% trans 'New didactic sequence...' %}</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--sidebar end-->
+
+        <!--main content start-->
+        <section class="">
+            {% block wrapper %}
+
+                <div class="side-body padding-top">
+
+                    {% block content %}
+
+                    {% endblock %}
+
+                </div>
+            {% endblock %}
+        </section>
+        <!--main content end-->
+    </div>
+    <footer class="app-footer">
+
+    </footer>
+</div>
+
+<div>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/bootstrap-switch.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/Chart.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/ace/ace.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/ace/mode-html.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/ace/theme-github.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/js/app.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/js/index.js"></script>
+
+
+
+    <script>
+
+        //knob
+        $(function () {
+            $(".knob").knob({
+                'draw': function () {
+                    $(this.i).val(this.cv + '%')
+                }
+            })
+        });
+
+        //carousel
+        $(document).ready(function () {
+            $("#owl-slider").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+        /* ---------- Map ---------- */
+        $(function () {
+            $('#map').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#000', '#000'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                backgroundColor: '#eef3f7',
+                onLabelShow: function (e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                }
+            });
+        });
+
+
+    </script>
+    {% block extrajs %}
+    {% endblock %}
+</div>
+</body>
+</html>
+
+

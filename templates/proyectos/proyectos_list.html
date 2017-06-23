@@ -1,0 +1,132 @@
+{% extends "principal.html" %}
+{% load i18n %}
+{% block content %}
+
+    {% block extracss %}
+        <style>
+
+            .nivel {
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                padding: 8px;
+                margin-top: 10px;
+                background: #fff;
+                border: 2px solid #666;
+                color: #666;
+                text-align: center;
+                font: 20px Arial,sans-serif ;
+            }
+
+            .lv{
+                text-align: center;
+            }
+
+        </style>
+
+    {% endblock %}
+    <!-- /.row -->
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href=" {%url 'proyecto_create'%}" style="margin-left:5px" class="btn btn-success pull-left"><i class="fa fa-plus-circle fa-fw"></i>{% trans "New didactic sequence" %} </a>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                        <i class="fa fa-user fa-fw"></i>{% trans "My Didactic Sequences" %}
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% if proyectos %}
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" id="usuarios-list">
+                                       <thead>
+                                            <tr>
+                                                <th>{% trans "Name" %}</th>
+                                                <th>{% trans "Description" %}</th>
+                                                <th>{% trans "Language" %}</th>
+                                                <th>{% trans "Level" %}</th>
+                                                <th>{% trans "Options" %}</th>
+                                            </tr>
+                                       </thead>
+                                       <tbody>
+                                            {% for a in proyectos %}
+                                                <tr>
+                                                    <td class="">
+                                                        <a href="{%url 'proyecto_view' a.pk %}"><h5><b>{{ a.nombre }}</b></h5></a>
+                                                    </td>
+                                                    <td class="">
+                                                        <h5>{{ a.descripcion }}</h5>
+                                                    </td>
+                                                    <td class="lv">
+                                                        <h5>{{ a.idioma.nombre }}</h5>
+                                                    </td>
+                                                    <td style="text-align: center;padding-top: 18px">
+                                                        <span class="nivel">{{ a.nivel.nombre }}</span>
+                                                    </td>
+                                                     <td class="">
+                                                         <a href="{%url 'proyecto_delete' a.pk %}" style="margin-left:5px" class="btn btn-danger"><i class="fa fa-times fa-fw"></i> {% trans "Delete" %}</a>
+                                                         <a href="{%url 'proyecto_edit' a.pk %}" style="margin-left:5px" class="btn btn-warning pull-left"><i class="fa fa-edit fa-fw"></i> {% trans "Edit" %}</a>
+                                                         <a href="{% url 'do_project' a.pk %}" style="margin-left:5px" class="btn btn-success pull-left"><i class="fa fa-edit fa-fw"></i> {% trans "Try" %}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                       </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                                {% else %}
+                                    <p>{% trans "No projects" %}</p>
+                                {% endif %}
+                            </div>
+
+                            <!-- /.col-lg-8 (nested) -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+            </div>
+        </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src='{{ STATIC_URL }}plantillas/proyecto_view.js'></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#search').removeClass('active');
+        $('#units').addClass('active');
+        $('#usuarios-list').dataTable({
+            "oLanguage": {
+			    "sUrl": "{{ STATIC_URL }}datatables/i18n/es_ES.txt"
+		    }
+
+        });
+
+
+    });
+
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            function ansel(bread) {
+                bread.empty();
+                var li1 = document.createElement('li');
+                li1.innerHTML = ["My Units"]
+                bread.append(li1);
+            }
+            ansel($("#bread"));
+        });
+        </script>
+{% endblock %}

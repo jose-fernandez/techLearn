@@ -1,0 +1,25 @@
+.title {
+
+}
+
+body {
+    background: #e8e9ea;
+}
+
+iframe {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 650px;
+}
+#main,#ejer, .tab .segment{
+
+    background: #1B1C1D;
+}
+#barra{
+    padding-bottom: 0;
+}
+
+#tabrow{
+    background: #acadae;
+}

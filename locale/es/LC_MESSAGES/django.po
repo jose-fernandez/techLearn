@@ -1,0 +1,568 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-13 11:25+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/login.html:6 templates/login.html.py:30
+#: templates/principal.html:15 templates/principal.html.py:117
+#, fuzzy
+#| msgid "Didactic Sequences"
+msgid "Didactic Sequences for CLIL"
+msgstr "Secuencias didácticas para AICLE"
+
+#: templates/login.html:39
+msgid "Log in"
+msgstr "Acceder"
+
+#: templates/login.html:45
+msgid "Username"
+msgstr "Usuario"
+
+#: templates/login.html:49 templates/login.html.py:97
+msgid "Password"
+msgstr "Contraseña"
+
+#: templates/login.html:53
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/login.html:63
+msgid "Dont have an account?"
+msgstr "¿No tienes cuenta?"
+
+#: templates/login.html:63 templates/login.html.py:75 templates/login.html:112
+msgid "Sign Up"
+msgstr " Regístrate"
+
+#: templates/login.html:88 templates/proyectos/buscador.html.py:32
+#: templates/proyectos/buscador.html:33
+#: templates/proyectos/proyectos_list.html:53
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/login.html:92
+msgid "Email address"
+msgstr "Correo electronico"
+
+#: templates/login.html:103
+msgid "Repeat password"
+msgstr "Repite contraseña"
+
+#: templates/login.html:110
+#: templates/proyectos/creadores/crear_recursoP2.html:270
+#: templates/proyectos/creadores/maker_temp1.html:21
+#: templates/proyectos/creadores/maker_temp2.html:21
+#: templates/proyectos/creadores/maker_temp3.html:25
+#: templates/proyectos/template_selector.html:86
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/login.html:112
+msgid "Signing Up"
+msgstr "Registrando"
+
+#: templates/login.html:191
+msgid "You have to fill all the fields!"
+msgstr "Debes rellenar todos los campos"
+
+#: templates/login.html:214
+msgid "The user already exist"
+msgstr "El usuario ya existe"
+
+#: templates/p3.html:22 templates/p3.html.py:31 templates/p3.html.py:51
+#: templates/p3.html:62 templates/p3.html.py:97 templates/p3.html.py:156
+#: templates/p3.html:190 templates/proyectos/creadores/crear_recurso.html:41
+#: templates/proyectos/creadores/crear_recurso.html:79
+#: templates/proyectos/creadores/crear_recurso.html:121
+#: templates/proyectos/creadores/crear_recurso.html:154
+#: templates/proyectos/creadores/crear_recurso.html:187
+#: templates/proyectos/creadores/crear_recurso.html:218
+#: templates/proyectos/creadores/crear_recursoP2.html:35
+#: templates/proyectos/creadores/crear_recursoP2.html:39
+#: templates/proyectos/creadores/crear_recursoP2.html:96
+#: templates/proyectos/creadores/crear_recursoP2.html:100
+#: templates/proyectos/creadores/crear_recursoP2.html:130
+#: templates/proyectos/creadores/crear_recursoP2.html:134
+#: templates/proyectos/creadores/crear_recursoP2.html:171
+#: templates/proyectos/creadores/crear_recursoP2.html:175
+#: templates/proyectos/creadores/crear_recursoP2.html:205
+#: templates/proyectos/creadores/crear_recursoP2.html:209
+#: templates/proyectos/creadores/crear_recursoP2.html:237
+#: templates/proyectos/creadores/crear_recursoP2.html:241
+#: templates/proyectos/creadores/maker_temp3.html:57
+#: templates/proyectos/creadores/maker_temp3.html:67
+#: templates/proyectos/creadores/maker_temp3.html:88
+#: templates/proyectos/creadores/maker_temp3.html:99
+#: templates/proyectos/creadores/maker_temp3.html:138
+#: templates/proyectos/creadores/maker_temp3.html:202
+#: templates/proyectos/creadores/maker_temp3.html:241
+#: templates/proyectos/creadores/maker_temp3.html:287
+#: templates/proyectos/creadores/maker_temp3.html:298
+#: templates/proyectos/creadores/maker_temp3.html:337
+msgid "Text"
+msgstr "Texto"
+
+#: templates/p3.html:23 templates/proyectos/creadores/maker_temp3.html.py:58
+msgid "Audio"
+msgstr ""
+
+#: templates/p3.html:24 templates/proyectos/creadores/maker_temp3.html.py:59
+msgid "Fill"
+msgstr "Rellenar"
+
+#: templates/p3.html:25 templates/proyectos/creadores/maker_temp3.html.py:60
+#: templates/proyectos/proyect_view.html:224
+#: templates/proyectos/proyectos_list.html:57
+msgid "Options"
+msgstr "Opciones"
+
+#: templates/p3.html:33 templates/p3.html.py:42 templates/p3.html.py:127
+#: templates/p3.html:220 templates/proyectos/creadores/maker_temp3.html:69
+#: templates/proyectos/creadores/maker_temp3.html:79
+#: templates/proyectos/creadores/maker_temp3.html:172
+#: templates/proyectos/creadores/maker_temp3.html:275
+#: templates/proyectos/creadores/maker_temp3.html:371
+msgid "Add"
+msgstr "Añadir"
+
+#: templates/p3.html:56 templates/p3.html.py:65 templates/p3.html.py:79
+#: templates/p3.html:91 templates/p3.html.py:100 templates/p3.html.py:114
+#: templates/p3.html:158 templates/p3.html.py:172 templates/p3.html.py:184
+#: templates/p3.html:193 templates/p3.html.py:207
+#: templates/proyectos/creadores/crear_recursoP2.html:201
+#: templates/proyectos/creadores/crear_recursoP2.html:233
+#: templates/proyectos/creadores/maker_temp3.html:93
+#: templates/proyectos/creadores/maker_temp3.html:104
+#: templates/proyectos/creadores/maker_temp3.html:120
+#: templates/proyectos/creadores/maker_temp3.html:132
+#: templates/proyectos/creadores/maker_temp3.html:143
+#: templates/proyectos/creadores/maker_temp3.html:159
+#: templates/proyectos/creadores/maker_temp3.html:207
+#: templates/proyectos/creadores/maker_temp3.html:223
+#: templates/proyectos/creadores/maker_temp3.html:235
+#: templates/proyectos/creadores/maker_temp3.html:246
+#: templates/proyectos/creadores/maker_temp3.html:262
+#: templates/proyectos/creadores/maker_temp3.html:292
+#: templates/proyectos/creadores/maker_temp3.html:303
+#: templates/proyectos/creadores/maker_temp3.html:319
+#: templates/proyectos/creadores/maker_temp3.html:331
+#: templates/proyectos/creadores/maker_temp3.html:342
+#: templates/proyectos/creadores/maker_temp3.html:358
+msgid "Hint "
+msgstr "Pista"
+
+#: templates/p3.html:139 templates/proyectos/creadores/maker_temp3.html:185
+msgid "Correct option"
+msgstr "Opción correcta"
+
+#: templates/p3.html:142 templates/proyectos/creadores/maker_temp3.html:188
+#, fuzzy
+#| msgid "Options"
+msgid "Option 2"
+msgstr "Opción 2"
+
+#: templates/p3.html:145 templates/proyectos/creadores/maker_temp3.html:191
+#, fuzzy
+#| msgid "Options"
+msgid "Option 3"
+msgstr "Opción 3"
+
+#: templates/p3.html:150 templates/proyectos/creadores/crear_recurso.html:127
+#: templates/proyectos/creadores/crear_recurso.html:158
+#: templates/proyectos/creadores/crear_recurso.html:191
+#: templates/proyectos/creadores/crear_recurso.html:222
+#: templates/proyectos/creadores/crear_recursoP2.html:92
+#: templates/proyectos/creadores/crear_recursoP2.html:126
+#: templates/proyectos/creadores/maker_temp2.html:97
+#: templates/proyectos/creadores/maker_temp2.html:150
+#: templates/proyectos/creadores/maker_temp2.html:173
+#: templates/proyectos/creadores/maker_temp3.html:196
+msgid "Hint"
+msgstr "Pista"
+
+#: templates/p3.html:228 templates/proyectos/creadores/maker_temp3.html:379
+#, fuzzy
+#| msgid "Add word"
+msgid "Add panel"
+msgstr "Añadir palabra"
+
+#: templates/principal.html:48
+msgid "Start"
+msgstr "Inicio"
+
+#: templates/principal.html:68
+msgid "Messages"
+msgstr "Mensajes"
+
+#: templates/principal.html:72
+msgid "No new messages"
+msgstr "No hay mensajes"
+
+#: templates/principal.html:91
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/principal.html:97
+msgid "Logout"
+msgstr "Cerrar Sesión"
+
+#: templates/principal.html:129
+msgid "Didactic Sequences"
+msgstr "Secuencias didácticas"
+
+#: templates/principal.html:138 templates/proyectos/proyectos_list.html:42
+msgid "My Didactic Sequences"
+msgstr "Mis Secuencias didácticas"
+
+#: templates/principal.html:143
+msgid "New didactic sequence..."
+msgstr "Nueva Secuencia didáctica..."
+
+#: templates/principal.html:152 templates/proyectos/buscador.html.py:27
+#: templates/proyectos/buscador.html:69
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/principal.html:159
+msgid "Video editor"
+msgstr ""
+
+#: templates/proyectos/buscador.html:36
+#: templates/proyectos/project_edit.html:70
+#: templates/proyectos/proyectos_create.html:45
+#: templates/proyectos/proyectos_list.html:55
+msgid "Language"
+msgstr "Idioma"
+
+#: templates/proyectos/buscador.html:39 templates/proyectos/buscador.html:50
+#: templates/proyectos/buscador.html:60
+msgid "All"
+msgstr "Todos"
+
+#: templates/proyectos/buscador.html:47
+#: templates/proyectos/project_edit.html:71
+#: templates/proyectos/proyectos_create.html:46
+#: templates/proyectos/proyectos_list.html:56
+msgid "Level"
+msgstr "Nivel"
+
+#: templates/proyectos/buscador.html:58
+#: templates/proyectos/project_edit.html:72
+#: templates/proyectos/proyectos_create.html:47
+msgid "Category"
+msgstr "Tema"
+
+#: templates/proyectos/creadores/crear_recurso.html:27
+msgid ""
+"Fill the form with the information you want to provide for this exercise"
+msgstr "Rellena los campos con la información que desees"
+
+#: templates/proyectos/creadores/crear_recurso.html:35
+msgid "Content for the question "
+msgstr "Contenido para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:46
+msgid "Text for the question"
+msgstr "Texto para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:62
+msgid "Media for the question"
+msgstr "Media para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:74
+msgid "Content for the answer"
+msgstr "Contenido para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:84
+msgid "Text for the answer"
+msgstr "Texto para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:100
+msgid "Media for the answer"
+msgstr "Media para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:115
+msgid "Add hints"
+msgstr "Añadir pistas"
+
+#: templates/proyectos/creadores/crear_recurso.html:116
+#, fuzzy
+#| msgid "Hints for the question"
+msgid "Hint 1 for the question:"
+msgstr "Pista 1 para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:150
+#, fuzzy
+#| msgid "Hints for the question"
+msgid "Hint 2 for the question:"
+msgstr "Pista 2 para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:183
+#, fuzzy
+#| msgid "Hints for the question"
+msgid "Hint 1 for the answer:"
+msgstr "Pista 1 para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:214
+#, fuzzy
+#| msgid "Hints for the question"
+msgid "Hint 2 for the answer:"
+msgstr "Pista 2 para la pregunta"
+
+#: templates/proyectos/creadores/crear_recurso.html:254
+#: templates/proyectos/creadores/crear_recursoP2.html:279
+msgid "Back"
+msgstr "Atrás"
+
+#: templates/proyectos/creadores/crear_recurso.html:257
+msgid "Save and continue"
+msgstr "Guardar y continuar"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:31
+msgid "Question: "
+msgstr "Pregunta:"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:53
+#: templates/proyectos/creadores/crear_recursoP2.html:188
+#, fuzzy
+#| msgid "Description"
+msgid "Question:"
+msgstr "Descripción"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:63
+msgid "Answers: "
+msgstr "Respuestas: "
+
+#: templates/proyectos/creadores/crear_recursoP2.html:89
+msgid "Hints for the question"
+msgstr "Pistas para la pregunta"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:162
+#, fuzzy
+#| msgid "Add word"
+msgid "New answer"
+msgstr "Añadir palabra"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:198
+#, fuzzy
+#| msgid "Hints for the question"
+msgid "Hints for the answer"
+msgstr "Pistas para la respuesta"
+
+#: templates/proyectos/creadores/crear_recursoP2.html:271
+#: templates/proyectos/creadores/maker_temp1.html:23
+#: templates/proyectos/creadores/maker_temp2.html:23
+#: templates/proyectos/creadores/maker_temp3.html:27
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/proyectos/creadores/maker_temp1.html:12
+#: templates/proyectos/creadores/maker_temp2.html:13
+msgid "Add columns to create the exercise"
+msgstr "Añade columnas para crear el ejercicio"
+
+#: templates/proyectos/creadores/maker_temp1.html:25
+#: templates/proyectos/creadores/maker_temp2.html:25
+msgid "Add column"
+msgstr "Añadir columna"
+
+#: templates/proyectos/creadores/maker_temp1.html:32
+#: templates/proyectos/creadores/maker_temp2.html:32
+#: templates/proyectos/creadores/maker_temp3.html:37
+msgid "Hide video for this exercise"
+msgstr "Ocultar video"
+
+#: templates/proyectos/creadores/maker_temp1.html:36
+#: templates/proyectos/creadores/maker_temp2.html:36
+#: templates/proyectos/creadores/maker_temp3.html:41
+#, fuzzy
+#| msgid "Exercises"
+msgid "Exercise number:"
+msgstr "Ejercicios"
+
+#: templates/proyectos/creadores/maker_temp1.html:38
+#: templates/proyectos/creadores/maker_temp2.html:38
+#: templates/proyectos/creadores/maker_temp3.html:43
+msgid "Default"
+msgstr "Por defecto"
+
+#: templates/proyectos/creadores/maker_temp1.html:53
+#: templates/proyectos/creadores/maker_temp2.html:53
+msgid "Attention!"
+msgstr "Atención"
+
+#: templates/proyectos/creadores/maker_temp1.html:54
+#: templates/proyectos/creadores/maker_temp2.html:54
+#, fuzzy
+#| msgid "Add columns to create the exercise"
+msgid "You need to add at least one column to save the exercise"
+msgstr "Añade columnas para crear el ejercicio"
+
+#: templates/proyectos/creadores/maker_temp3.html:61
+msgid "Drag 'n Drop"
+msgstr "Arrastrar"
+
+#: templates/proyectos/creadores/maker_temp3.html:377
+msgid "Line break"
+msgstr "Salto de linea"
+
+#: templates/proyectos/creadores/maker_temp3.html:445
+#: templates/proyectos/p3_temp.html:87
+msgid "Choose"
+msgstr "Elige"
+
+#: templates/proyectos/doProyect.html:96
+#: templates/proyectos/proyect_view.html:70
+#: templates/proyectos/proyect_view.html:91
+#: templates/proyectos/proyect_view.html:101
+msgid "Transcription"
+msgstr "Transcripción"
+
+#: templates/proyectos/doProyect.html:122
+msgid "Congratuations!"
+msgstr "Enhorabuena!"
+
+#: templates/proyectos/doProyect.html:129
+#, fuzzy
+#| msgid "You have finished this sequence, press ok to continue."
+msgid "You have finished this unit, press ok to go back."
+msgstr "Has finalizado esta secuecnia, presiona OK para continuar."
+
+#: templates/proyectos/p1_temp.html:130 templates/proyectos/p2_temp.html:177
+msgid "This should help..."
+msgstr "Esto te podría ayudar..."
+
+#: templates/proyectos/p1_temp.html:164 templates/proyectos/p2_temp.html:206
+msgid "This definitely is going to help..."
+msgstr "Esto te va a ayudar"
+
+#: templates/proyectos/p1_temp.html:197 templates/proyectos/p2_temp.html:116
+#: templates/proyectos/p2_temp.html:237 templates/proyectos/p3_temp.html:181
+msgid "Well done, you have finished this exercise."
+msgstr "Bien hecho, has finalizado este ejercicio."
+
+#: templates/proyectos/p2_temp.html:84 templates/proyectos/p2_temp.html:148
+#: templates/proyectos/p3_temp.html:63 templates/proyectos/p3_temp.html:97
+#: templates/proyectos/p3_temp.html:121 templates/proyectos/p3_temp.html:151
+msgid "A little help"
+msgstr "Una pequeña ayuda"
+
+#: templates/proyectos/p2_temp.html:115
+msgid "Good job"
+msgstr "Buen trabajo"
+
+#: templates/proyectos/project_edit.html:67
+#, fuzzy
+#| msgid "Projects"
+msgid "Sequence Name"
+msgstr "Nombre de la secuencia"
+
+#: templates/proyectos/project_edit.html:68
+#: templates/proyectos/proyectos_create.html:43
+#: templates/proyectos/proyectos_list.html:54
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/proyectos/project_edit.html:69
+#: templates/proyectos/proyectos_create.html:44
+#, fuzzy
+#| msgid "Transcription"
+msgid "Transcription/Text"
+msgstr "Transcripción"
+
+#: templates/proyectos/proyect_view.html:125
+msgid "Exercises"
+msgstr "Ejercicios"
+
+#: templates/proyectos/proyect_view.html:135
+msgid ""
+"This exercises are only to test their correct behaviour. To try the complete "
+"unit go to Options>Try sequence"
+msgstr ""
+"Aquí se muestran los ejercicios solo para probar su funcionamiento. Para "
+"probar la secuencia vaya a Opciones>Probar secuencia "
+
+#: templates/proyectos/proyect_view.html:142
+msgid "Add exercise"
+msgstr "Añadir ejercicio"
+
+#: templates/proyectos/proyect_view.html:228
+#: templates/proyectos/proyectos_list.html:77
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/proyectos/proyect_view.html:233
+#: templates/proyectos/proyectos_list.html:76
+msgid "Delete"
+msgstr "Eliminar"
+
+#: templates/proyectos/proyect_view.html:238
+msgid "Try sequence"
+msgstr "Probar secuencia"
+
+#: templates/proyectos/proyectos_create.html:10
+msgid "New Didactic Sequence"
+msgstr "Nueva secuencia didáctica"
+
+#: templates/proyectos/proyectos_create.html:25
+msgid "Next"
+msgstr "Siguiente"
+
+#: templates/proyectos/proyectos_create.html:42
+#, fuzzy
+#| msgid "Projects"
+msgid "Didactic Sequence Name"
+msgstr "Nombre de la secuencia"
+
+#: templates/proyectos/proyectos_create.html:48
+msgid "Video URL"
+msgstr ""
+
+#: templates/proyectos/proyectos_list.html:34
+
+msgid "New didactic sequence"
+msgstr "Nueva secuencia didáctica"
+
+#: templates/proyectos/proyectos_list.html:78
+msgid "Try"
+msgstr "Probar"
+
+#: templates/proyectos/proyectos_list.html:87
+#, fuzzy
+#| msgid "Try project"
+msgid "No projects"
+msgstr "Probar proyecto"
+
+#: templates/proyectos/template_selector.html:49
+msgid "Choose template type:"
+msgstr "Elije el tipo de ejercicio:"
+
+#: templates/video_editor.html:35
+msgid "Load video from your disc:"
+msgstr ""
+
+#: templates/video_editor.html:44
+msgid "Write the youtube video url:"
+msgstr ""
+
+#: templates/video_editor.html:51
+msgid "File type not allowed"
+msgstr ""
+
+#~ msgid "Project Name"
+#~ msgstr "Nombre "

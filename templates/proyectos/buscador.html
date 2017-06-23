@@ -1,0 +1,81 @@
+{% extends "principal.html" %}
+{% load i18n %}
+
+{% block extracss %}
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/components/icon.min.css"/>
+
+{% endblock %}
+
+{% block extrajs %}
+
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}plantillas/buscador.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="ui container grid">
+        <div class="sixteen wide column ui centered segment">
+            <h4 class="ui header">{% trans 'Search' %}</h4>
+            <div class="ui form">
+                <div class="ui fields">
+                    <div class="" style="width: 8%"></div>
+                    <div class="field" >
+                        <label>{% trans 'Name' %}:</label>
+                        <input type="text" id="name" placeholder="{% trans 'Name' %}">
+                    </div>
+                    <div class="field">
+                        <label for="idioma">{% trans 'Language' %}:</label>
+                        <select id="idioma" class="ui search dropdown">
+
+                            <option value="0">{% trans 'All' %}</option>
+                            {% for idioma in idiomas %}
+                                <option>{{ idioma.fields.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="nivel">{% trans 'Level' %}:</label>
+                        <select id="nivel" class="ui search dropdown">
+
+                            <option value="0">{% trans 'All' %}</option>
+                            {% for nivel in niveles %}
+                                <option>{{ nivel.fields.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="tema">{% trans 'Category' %}:</label>
+                        <select id="tema" class="ui search dropdown">
+                            <option value="0">{% trans 'All' %}</option>
+                            {% for tema in temas %}
+                                <option>{{ tema.fields.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <button class="ui primary button" id="btn_buscar" href="{% url 'accion_buscar' %}" style=" position: absolute; bottom: 0;"><i
+                                class="search icon"></i>{% trans 'Search' %}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="resultados" class="ui grid container centered segment cards">
+
+        </div>
+
+    </div>
+
+{% endblock %}

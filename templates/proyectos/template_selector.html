@@ -1,0 +1,96 @@
+{% extends "principal.html" %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block extracss %}
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/components/icon.min.css"/>
+    <style>
+
+        a .desc {
+            border-radius: 3px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            margin-left: 2%;
+            margin-right: 2%;
+            padding: 10px;
+            background: black;
+            color: #fff;
+            opacity: 0;
+            transition: 1s;
+        }
+
+        a:hover .desc {
+            opacity: .7;
+        }
+
+    </style>
+{% endblock %}
+
+{% block extrajs %}
+    <!-- Page-Level Plugin CSS - Tables -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="ui container fluid">
+        <div class="ui grid">
+
+            <div class="sixteen wide center aligned column">
+                <h1>{% trans "Choose template type:" %}</h1>
+            </div>
+
+
+            <div class="three column row ui segment ">
+
+                <div class="column" id="2">
+                    <a href="{% url 'nuevo_ejercicio' proyecto.id 3 %}">
+                        <div class="desc">
+                            <h2>Fill the gap</h2>
+                        </div>
+                        <img src="{{ STATIC_URL }}imagenes/t3.png" width="100%">
+                    </a>
+                </div>
+
+                <div class=" column" id="1">
+
+                    <a href="#">
+                        <div class="desc">
+                            <h2>Pairs</h2>
+                        </div>
+                        <img src="{{ STATIC_URL }}imagenes/t1.png" width="100%">
+                    </a>
+                </div>
+
+                <div class="column" id="2">
+                    <a href="#">
+                        <div class="desc">
+                            <h2>Columns</h2>
+                        </div>
+                        <img src="{{ STATIC_URL }}imagenes/t2.png" width="100%">
+                    </a>
+                </div>
+
+                
+
+            </div>
+
+            <div class="sixteen wide column">
+                <a onClick="history.go(-1);" class="ui red button"><i class="fa fa-times fa-fw"></i>{% trans "Cancel" %}
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}

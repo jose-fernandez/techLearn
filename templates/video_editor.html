@@ -1,0 +1,63 @@
+{% extends 'principal.html' %}
+{% load i18n %}
+
+{% block extracss %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/components/icon.min.css"/>
+    <title>Editar video</title>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}video_editor/video_editor.js'></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="ui container centered  grid">
+
+        <div class="ui segment center aligned ten wide column carga">
+            <div class="ui buttons">
+                <button id="local" class="ui blue button">Local file</button>
+                <div class="or" data-text="or"></div>
+                <button id="yt" class="ui red button"><img src="{{ STATIC_URL }}imagenes/youtube_logo.png" width="40"></button>
+            </div>
+        </div>
+
+        <div id="carga_local" class="ui attached segment ten wide column carga">
+            <div class="ui form">
+                <div class="field">
+                    <p>{% trans 'Load video from your disc:' %}</p>
+                    <input href="{% url 'cargarVideo' %}" id="input_local" type="file">
+                </div>
+            </div>
+        </div>
+
+        <div id="carga_youtube" class="ui attached segment ten wide column carga">
+            <div class="ui form">
+                <div class="field">
+                    <p>{% trans 'Write the youtube video url:' %}</p>
+                    <input href="{% url 'descargarYT' %}" id="input_yt" type="url" placeholder="url...">
+                </div>
+            </div>
+        </div>
+
+        <div class="ui bottom attached warning message ten wide column hidden">
+            <p>{% trans 'File type not allowed' %}</p>
+        </div>
+
+        <div class="ten wide column carga">
+            <div id="btOk" class="ui button primary">Ok</div>
+        </div>
+
+        <div id="video_segment" class="ui segment ten wide column hidden">
+            <video id="video_carga" src="" controls preload width="100%"></video>
+        </div>
+    </div>
+
+{% endblock %}

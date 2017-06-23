@@ -1,0 +1,209 @@
+{% extends "principal.html" %}
+{% load i18n %}
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link href="https://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}plantillas/proyecto_view.css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+    <!-- If you'd like to support IE8 -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <script src="https://vjs.zencdn.net/5.8.8/video.js"></script>
+    <script type="text/javascript" src='{{ STATIC_URL }}plantillas/proyecto_view.js'></script>
+    <script>
+        $(document).ready(function () {
+            function ansel(bread) {
+                bread.empty();
+                var li1 = document.createElement('li');
+                li1.innerHTML = ["My Didactic Sequences"];
+                var li2 = document.createElement('li');
+                li2.innerHTML = ["{{ proyecto.nombre }}"];
+                bread.append(li1)
+                bread.append(li2);
+            }
+
+            ansel($("#bread"));
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="ui container fluid">
+            <div id="media_content" class="ui grid media">
+                <div class="ui center aligned sixteen wide column header">
+                    <h1 class="ui header" style="color: white">{{ proyecto.nombre }}</h1>
+                </div>
+                <div class="centered six wide column video">
+                    {% if not proyecto.media and not proyecto.urlyt %}
+                        <div class="six wide column">
+                            <p style="color: whitesmoke;font-size: 20px;width: 30%;">{{ proyecto.transcripcion }}</p>
+                        </div>
+                    {% else %}
+                        {% if proyecto.urlyt and proyecto.urlyt != "urlyt" %}
+                            <iframe id="ytvideo" width="100%" height="360" frameborder="0" allowfullscreen src="">
+                            </iframe>
+                            <script>
+                                function getId(url) {
+                                    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                                    var match = url.match(regExp);
+
+                                    if (match && match[2].length == 11) {
+                                        return match[2];
+                                    } else {
+                                        return 'error';
+                                    }
+                                }
+
+                                var myId = getId('{{ proyecto.urlyt }}');
+
+                                var iframe = document.getElementById('ytvideo');
+                                iframe.setAttribute('src','//www.youtube.com/embed/' + myId + '');
+                            </script>
+                            {% if proyecto.transcripcion != "" %}
+                                <div class="two wide column ">
+                                    <button id="trans"
+                                            class="ui button teal right floated">{% trans "Transcription" %}</button>
+                                </div>
+
+                            {% endif %}
+                        {% elif proyecto.media.extension == 'mp4' or proyecto.media.extension == 'ogg' or proyecto.media.extension == 'webm' %}
+                            <div class="wrapper">
+                                <div class="videocontent">
+                                    <video id="my-video" class="video-js vjs-16-9 " controls preload="auto" data-setup="{}" width="100%">
+                                        <source src="/{{ proyecto.media.url }}" type="video/{{ proyecto.media.extension }}"/>
+                                        
+                                    </video>
+                                </div>
+                                {% if proyecto.transcripcion != "" %}
+                                    <div class="two wide column ">
+                                        <button id="trans" class="ui button teal right floated">{% trans "Transcription" %}</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <audio controls>
+                                <source src="/{{ proyecto.media.url }}" type="audio/{{ proyecto.media.extension }}">
+                            </audio>
+                            {% if proyecto.transcripcion != "" %}
+                                <div class="two wide column ">
+                                    <button id="trans" class="ui button teal right floated">{% trans "Transcription" %}</button>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+            {% if proyecto.transcripcion != "" %}
+                <div class="ui right aligned grid">
+                    <div style="display: none">
+                        <div id='transcription' class="centered six wide column">
+                            <p disabled style="font-size:1.2em;display:block;color: whitesmoke;text-align: center;">
+                                {{ proyecto.transcripcion }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="ui container fluid" style="margin-top: 50px">
+        <div class="ui grid">
+            <div class="ui center aligned sixteen wide column ">
+                <h3 class="ui subheader">{% trans "Exercises" %}</h3>
+            </div>
+
+
+            <div class="ui center aligned sixteen wide column">
+                <hr class="style-two" style="">
+            </div>
+            
+            <div class="sixteen wide column">
+                <a href="{% url 'selector' proyecto.id %}" class="ui button primary" role="button"
+                   aria-expanded="false"><i
+                        class="fa fa-plus"></i>&emsp;{% trans "Add exercise" %}</a>
+            </div>
+            <div class="ui sixteen wide column">
+
+                <div class="ui top attached tabular menu">
+                    {% for ej in proyecto.ejercicios.all %}
+                        {% if ej.tipo == 1 %}
+                            <a class="item ejercicio" id="ej{{ ej.id }}" data-tab="ej{{ ej.id }}"><i
+                                    class="fa fa-th"></i></a>
+                        {% elif ej.tipo == 2 %}
+                            <a class="item ejercicio" id="ej{{ ej.id }}" data-tab="ej{{ ej.id }}"><i
+                                    class="fa fa-list"></i> </a>
+                        {% elif ej.tipo == 3 %}
+                            <a class="item ejercicio" id="ej{{ ej.id }}" data-tab="ej{{ ej.id }}"><i
+                                    class="fa fa-pencil"></i> </a>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+                {% for ej in proyecto.ejercicios.all %}
+                    <div class="ui bottom attached tab segment" data-tab="ej{{ ej.id }}" id="ej{{ ej.id }}seg">
+                        {% if ej.tipo == 1 %}
+                            <div id="{{ ej.id }}" class="">
+
+                                <div class="sixteen wide column">
+                                    <button id="reload" class="ui button primary reload"><i
+                                            class="fa fa-refresh "></i>
+                                    </button>
+                                    <a id="edit{{ ej.id }}" href="{% url 'creando_ej' ej.id proyecto.id %}"
+                                       class="ui button yellow"><i
+                                            class="fa fa-pencil "></i></a>
+                                    <a id="delete{{ ej.id }}" href="{% url 'del_ejercicio' proyecto.id ej.id %}"
+                                       class="ui button red" role="button" aria-expanded="false"><i
+                                            class="fa fa-times"></i></a>
+                                </div>
+                                <iframe id="frame{{ ej.id }}" src="{% url 'p1_temp' ej.id %}"
+                                        style="position:relative; margin: auto;width: 100%;height: 650px;"></iframe>
+
+                            </div>
+                        {% elif ej.tipo == 2 %}
+                            <div id="{{ ej.id }}" class="">
+
+                                <div class="sixteen wide column">
+                                    <button id="reload" class="ui button primary reload"><i
+                                            class="fa fa-refresh "></i>
+                                    </button>
+                                    <a id="edit{{ ej.id }}" href="{% url 'creando_ej2' ej.id proyecto.id %}"
+                                       class="ui button yellow"><i
+                                            class="fa fa-pencil "></i></a>
+                                    <a id="delete{{ ej.id }}" href="{% url 'del_ejercicio' proyecto.id ej.id %}"
+                                       class="ui button red" role="button" aria-expanded="false"><i
+                                            class="fa fa-times"></i></a>
+                                </div>
+                                <iframe id="frame{{ ej.id }}" src="{% url 'p2_temp' ej.id %}"
+                                        style="position:relative; margin: auto;width: 100%;height: 650px;"></iframe>
+                            </div>
+
+                        {% elif ej.tipo == 3 %}
+                            <div id="{{ ej.id }}" class="">
+                                <div class="sixteen wide column">
+                                    <button id="reload" class="ui button primary reload">
+                                        <i class="fa fa-refresh "></i>
+                                    </button>
+                                    <a id="edit{{ ej.id }}" href="{% url 'creando_ej3' ej.id proyecto.id %}"
+                                       class="ui button yellow"><i class="fa fa-pencil "></i></a>
+                                    <a id="delete{{ ej.id }}" href="{% url 'del_ejercicio' proyecto.id ej.id %}"
+                                       class="ui button red" role="button" aria-expanded="false"><i
+                                            class="fa fa-times"></i></a>
+                                </div>
+                                <iframe id="frame{{ ej.id }}" src="{% url 'p3_temp' ej.id %}"
+                                        style="position:relative; margin: auto;width: 100%;height: 650px;"></iframe>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block tools %}
+{% endblock %}

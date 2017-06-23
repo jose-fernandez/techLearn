@@ -1,0 +1,461 @@
+{% extends 'principal.html' %}
+{% load i18n %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}plantillas/maker3/maker3.css"/>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+    <script src="{{ STATIC_URL }}plantillas/maker3/maker3.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="ui container">
+        <input type="hidden" value="{{ ejercicio.id }}" id="ejId"/>
+        <input type="hidden" value="{% url 'del_recursop3' %}" id="urlDel"/>
+        <input type="hidden" value="{{ proyecto.id }}" id="proyId"/>
+
+        <div class="row">
+            <a href="{% url "proyecto_view" proyecto.id %}" class="ui red button"><i
+                    class="fa fa-times"></i>{% trans "Cancel" %}</a>
+            <a href="{% url 'guardar' ejercicio.id proyecto.id %}" class="ui green disabled button" id="save_bt"><i
+                    class="fa fa-save"></i>{% trans "Save" %}</a>
+        </div>
+        <input id="id_ej" value="{{ ejercicio.id }}" style="display: none"/>
+        <div class="segment ui">
+            <div class="ui segment form">
+                <div class="fields">
+                    
+                    <div class="one field">
+                        <label for="">{% trans 'Exercise number:' %}</label>
+                        <select href="{% url 'set_posicion' %}" id="selectpos" class="ui field dropdown">
+                            <option value="0">{% trans 'Default' %}</option>
+                            {% for ej in proyecto.ejercicios.all %}
+                                {% if ej.posicion == ejercicio.posicion %}
+                                    <option selected value="{{ ej.posicion }}">{{ ej.posicion }}</option>
+                                {% else %}
+                                    <option value="{{ ej.posicion }}">{{ ej.posicion }}</option>
+                                {% endif %}
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="ui top attached tabular menu">
+                <a class="item active" data-tab="first">{% trans 'Text' %}</a>
+                <a class="item" data-tab="second">{% trans 'Audio' %}</a>
+                <a class="item" data-tab="third">{% trans 'Fill' %}</a>
+                <a class="item" data-tab="fourth">{% trans 'Options' %}</a>
+                <a class="item" data-tab="fifth">{% trans "Drag 'n Drop" %}</a>
+            </div>
+            <div class="ui bottom attached tab segment active" data-tab="first">
+                <form action="{% url 'crear_palabra' %}" class="ui form" id="form_texto" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="field texto">
+                        <input type="text" name="texto" id="texto" placeholder="{% trans 'Text' %}">
+                    </div>
+                    <button class="ui teal button" type="submit">{% trans 'Add' %}</button>
+
+                </form>
+            </div>
+            <div class="ui bottom attached tab segment" data-tab="second">
+                <form action="{% url 'guardar_archivo' %}" class="ui form" id="form_file">
+                    {% csrf_token %}
+                    <div class="field">
+                        <input type="file" name="audio" id="audio">
+                    </div>
+                    <button class="ui teal button" type="submit">{% trans 'Add' %}</button>
+                </form>
+            </div>
+            <div class="ui bottom attached tab segment" data-tab="third">
+                <form action="{% url 'guardar_fill' %}" class="ui form" id="form_fill" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="ui grid container">
+                        <div class="sixteen wide column">
+                            <div class="field fill">
+                                <input type="text" name="fill" id="fill" placeholder="{% trans 'Text' %}" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="eight wide centered column">
+                            <div class="row">
+                                <h3>{% trans 'Hint ' %}1</h3>
+                            </div>
+                            <div class="row">
+                                <div id='fh1' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class="ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f1">{% trans 'Hint ' %}1</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f1" id="id_texto_f1"
+                                                           class=" form-control"
+                                                           maxlength="500" autocomplete="off"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f1">{% trans 'Hint ' %}1</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f1" multiple="multiple" name="media_f1"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3>{% trans 'Hint ' %}2</h3>
+                            </div>
+                            <div class="row">
+                                <div id='fh2' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class=" ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f2">{% trans 'Hint ' %}2</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f2" id="id_texto_f2"
+                                                           class=" form-control"
+                                                           maxlength="500" autocomplete="off"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f2">{% trans 'Hint ' %}2</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f2" multiple="multiple" name="media_f2"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twelve wide column">
+                            <button class="ui teal button" type="submit">{% trans 'Add' %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="ui bottom attached tab segment" data-tab="fourth">
+                <form action="{% url 'guardar_options' %}" class="ui form" id="form_options">
+                    {% csrf_token %}
+                    <div class="ui grid container">
+                        <div class="sixteen wide column">
+                            <div class="field option1">
+                                <input type="text" name="option1" id="option1"
+                                       placeholder="{% trans 'Correct option' %}">
+                            </div>
+                            <div class="field option2">
+                                <input type="text" name="option2" id="option2" placeholder="{% trans 'Option 2' %}">
+                            </div>
+                            <div class="field option3">
+                                <input type="text" name="option3" id="option3" placeholder="{% trans 'Option 3' %}">
+                            </div>
+                        </div>
+                        <div class="eight wide centered column">
+                            <div class="row">
+                                <h3>{% trans 'Hint' %}1</h3>
+                            </div>
+                            <div class="row">
+                                <div id='oh1' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class="ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f1_op">{% trans 'Hint ' %}1</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f1_op" id="id_texto_f1_op"
+                                                           class="form-control"
+                                                           maxlength="500"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f1_op">{% trans 'Hint ' %}1</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f1_op" multiple="multiple" name="media_f1_op"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3>{% trans 'Hint ' %}2</h3>
+                            </div>
+                            <div class="row">
+                                <div id='oh2' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class=" ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f2_op">{% trans 'Hint ' %}2</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f2_op" id="id_texto_f2_op"
+                                                           class="form-control"
+                                                           maxlength="500"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f2_op">{% trans 'Hint ' %}2</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f2_op" multiple="multiple" name="media_f2_op"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twelve wide column">
+                            <button class="ui teal button" type="submit">{% trans 'Add' %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="ui bottom attached tab segment" data-tab="fifth">
+                <form action="{% url 'guardar_drag' %}" class="ui form" id="form_drag" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="ui grid container">
+                        <div class="sixteen wide column">
+                            <div class="field drag">
+                                <input type="text" name="drag" id="drag" placeholder="{% trans 'Text' %}" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="eight wide centered column">
+                            <div class="row">
+                                <h3>{% trans 'Hint ' %}1</h3>
+                            </div>
+                            <div class="row">
+                                <div id='fh1' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class="ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f1_drag">{% trans 'Hint ' %}1</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f1_drag" id="id_texto_f1_drag"
+                                                           class=" form-control"
+                                                           maxlength="500" autocomplete="off"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f1_drag">{% trans 'Hint ' %}1</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f1_drag" multiple="multiple" name="media_f1_drag"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3>{% trans 'Hint ' %}2</h3>
+                            </div>
+                            <div class="row">
+                                <div id='fh2' class="ui horizontal segments">
+                                    <div class="ui center aligned segment opcion1">
+                                        <div class=" ui primary button s6 opcion opcion1">
+                                            <span>{% trans 'Text' %}</span>
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_texto_f2_drag">{% trans 'Hint ' %}2</label>
+                                                <div class="">
+                                                    <input type="text" name="texto_f2_drag" id="id_texto_f2_drag"
+                                                           class=" form-control"
+                                                           maxlength="500" autocomplete="off"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui center aligned segment opcion2">
+                                        <div class="ui primary button s6 opcion opcion2">
+                                            <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                            <div class="form-group">
+                                                <div class="ui mini button yellow reset" style="float: left"><i
+                                                        class="fa fa-arrow-left"></i></div>
+                                                <label class="control-label"
+                                                       for="id_media_f2_drag">{% trans 'Hint ' %}2</label>
+                                                <div class=" ">
+                                                    <input id="id_media_f2_drag" multiple="multiple" name="media_f2_drag"
+                                                           type="file">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twelve wide column">
+                            <button class="ui teal button" type="submit">{% trans 'Add' %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <a href="{% url 'crear_recursop3' %}" id="url_guardar" style="display: none"></a>
+            <button class="ui yellow button" href="{% url 'crear_salto' %}" type="button" id="salto">{% trans 'Line break' %}</button>
+        </div>
+        <button class="ui blue disabled button" id="masrec">{% trans 'Add panel' %}</button>
+
+        <div id="results"></div>
+        <div id="recursos_panel">
+
+            <div class="six wide segment ui">
+
+                <div id="panel" class="ui grid contenedor">
+
+                    <div class="row" style="display: none">
+                        <input id="key_rec" type="hidden" value="">
+                        <button class="ui green button" id="save">
+                            <i class="fa fa-save"></i>
+                        </button>
+
+                        <button href="{% url 'del_recursop3' %}" id="borrar_rec" style="display: none" class="ui button red">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% for rec in ejercicio.recursosP3.all %}
+
+                <div class="padded segment ui">
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+                            <a href="{% url 'del_recurso' rec.id ejercicio.id proyecto.id %}" class="borrar2">
+                                <div class="ui button red">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </a>
+                        </div>
+                        {% for text in rec.textos.all %}
+                                {% if text.tipo == 1 %}
+                                    <div class="ui label">
+                                        <p>{{ text.origen }}</p>
+                                    </div>
+                                {% elif text.tipo == 2 %}
+                                    <div class="ui label">
+                                        <audio controls>
+                                            <source src="/{{ text.audio.url }}" type="audio/{{ text.audio.extension }}">
+                                        </audio>
+                                    </div>
+                                {% elif text.tipo == 3 %}
+                                    <div class="ui label">
+                                        <div class="ui form">
+                                            <div class="fields">
+
+                                                <input type="text" class="resp" name="resp" id="resp{{ text.id }}"
+                                                       value="{{ text.origen }}" placeholder="{{ text.origen }}"
+                                                       style="display: none">
+
+                                                <div class="field">
+                                                    <input type="text" class="fill" name="fill" id="{{ text.id }}"
+                                                           placeholder="{{ text.origen }}">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elif text.tipo == 4 %}
+                                    <div class="ui label">
+                                        <div class="ui form">
+                                            <div class="">
+                                                <div class="field">
+                                                    <select class="select" id="{{ text.id }}">
+                                                        <option value="" disabled selected>{% trans 'Choose' %}</option>
+                                                        <option class="correcta" value="1">{{ text.origen }}</option>
+                                                        <option value="2">{{ text.opcion1 }}</option>
+                                                        <option value="3">{{ text.opcion2 }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elif text.tipo == 5 %}
+                                    <div class="ui violet label large" id="{{ text.id }}">{{ text.origen }}</div>
+                                {% elif text.tipo == 6 %}
+                                    <div class="ui row"></div>
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

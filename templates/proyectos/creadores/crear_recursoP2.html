@@ -1,0 +1,287 @@
+{% extends 'principal.html' %}
+{% load i18n %}
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}plantillas/crear_recurso2.css'/>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}assets/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}plantillas/crear_recurso.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <form class="form-signin" action="{% url 'guardar_recursop2' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="hidden" name="ide" value="{{ ejercicio.id }}">
+        <input type="hidden" name="idp" value="{{ idp }}">
+        <input id="idr" type="hidden" name="idr" value="{{ recurso.id }}">
+
+        <div class="container">
+            <div class="ui cards">
+
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">{% trans 'Question: ' %}</div>
+                        <div id='preg' class="ui horizontal segments row">
+                            <div class="ui center aligned segment opcion1">
+                                <div class="ui primary button opcion opcion1">
+                                    <span class="titu">{% trans 'Text' %}</span>
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label  " for="id_texto">{% trans 'Text' %}</label>
+                                        <div class="">
+                                            <textarea type="text" name="texto" id="id_texto" class=" form-control"
+                                                      maxlength="500" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui center aligned segment opcion2">
+                                <div class="col s6 media_f1 btn opcion opcion2">
+                                    <img src="https://maxcdn.icons8.com/Color/PNG/48/Files/video_file-48.png">
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label" for="id_media">{% trans 'Question:' %}</label>
+                                        <div class=" ">
+                                            <input id="id_media" multiple="multiple" name="media" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="header">{% trans 'Answers: ' %}</div>
+                        <div id="respBtn" class="fluid ui button teal addRsc">
+                            <i  class="fa fa-plus"></i>
+                        </div>
+                        <div id="respuestas_panel" class="ui segments">
+
+
+                            {% for resp in recurso.resps.all %}
+                                <div class="ui segment">
+                                    {% if resp.texto %}
+                                        <p id="{{ rec.id }}">{{ resp.texto }}</p>
+                                    {% else %}
+                                        <audio controls style="width: 100%">
+                                            <source src="/{{ resp.media.url }}" type="audio/{{ resp.media.extension }}">
+                                        </audio>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">
+                            {% trans 'Hints for the question' %}
+                        </div>
+
+                        <p >{% trans 'Hint' %} 1</p>
+                        <div id='h1_1' class="ui horizontal segments">
+                            <div class="ui center aligned segment opcion1">
+                                <div class="ui primary button opcion opcion1">
+                                    <span class="titu">{% trans 'Text' %}</span>
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label  " for="id_texto_n1">{% trans 'Text' %} n1</label>
+                                        <div class=" ">
+                                            <input class=" form-control" id="id_texto_n1" maxlength="300"
+                                                   name="texto_n1"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui center aligned segment opcion2">
+                                <div class="col s6 media_n1 btn opcion opcion2">
+                                    <img src="https://maxcdn.icons8.com/Color/PNG/48/Files/video_file-48.png">
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label  " for="id_media_n1">Media n1</label>
+                                        <div class=" ">
+                                            <input id="id_media_n1" multiple="multiple" name="media_n1" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <p>{% trans 'Hint' %} 2</p>
+                        <div id='h1_2' class="ui horizontal segments">
+                            <div class="ui center aligned segment opcion1">
+                                <div class="ui primary button opcion opcion1">
+                                    <span class="titu">{% trans 'Text' %}</span>
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label  " for="id_texto_n2">{% trans 'Text' %} n2</label>
+                                        <div class=" ">
+                                            <input class=" form-control" id="id_texto_n2" maxlength="300"
+                                                   name="texto_n2"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui center aligned segment opcion2">
+                                <div class="col s6 media_n2 btn opcion opcion2">
+                                    <img src="https://maxcdn.icons8.com/Color/PNG/48/Files/video_file-48.png">
+                                    <div class="form-group">
+                                        <div class="ui mini button yellow reset" style="float: left"><i
+                                                class="fa fa-arrow-left"></i></div>
+                                        <label class="control-label  " for="id_media_n2">Media n2</label>
+                                        <div class=" ">
+                                            <input id="id_media_n2" multiple="multiple" name="media_n2" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui basic small modal">
+            <div class="header ui centered">{% trans 'New answer' %}</div>
+            <div class="description">
+                <div id="dialogResp" class="ui cards">
+
+                    <div class="ui card">
+                        <div class="content">
+                            <div id='resp' class="ui horizontal segments">
+                                <div class="ui center aligned segment opcion1">
+                                    <div class="ui big button opcion opcion1">
+                                        <span class="titu">{% trans 'Text' %}</span>
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header" for="id_texto">{% trans 'Text' %}</label>
+                                            <div class=" ">
+                                                <textarea id="texto_resp" name="texto" type="text" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui center aligned segment opcion2">
+                                    <div class="ui button opcion opcion2">
+                                        <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header" for="id_media">{% trans 'Question:' %}</label>
+                                            <div class=" ">
+                                                <input id="media_resp" multiple="multiple" name="media" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="header">
+                                {% trans 'Hints for the answer' %}:
+                            </div>
+
+                            <div class="ui tiny header">{% trans 'Hint ' %} 1</div>
+                            <div id='h1_1' class="ui horizontal segments">
+                                <div class="ui center aligned segment opcion1">
+                                    <div class="ui primary button opcion opcion1">
+                                        <span class="titu">{% trans 'Text' %}</span>
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header " for="id_texto_n1">{% trans 'Text' %} n1</label>
+                                            <div class=" ">
+                                                <input class=" form-control" id="texto_n1_resp" maxlength="300"
+                                                       name="texto_n1"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui center aligned segment opcion2">
+                                    <div class="ui button opcion opcion2">
+                                        <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header " for="id_media_n1">Media n1</label>
+                                            <div class=" ">
+                                                <input id="media_n1_resp" multiple="multiple" name="media_n1" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui tiny header">{% trans 'Hint ' %} 2</div>
+                            <div id='h1_2' class="ui horizontal segments">
+                                <div class="ui center aligned segment opcion1">
+                                    <div class="ui primary button opcion opcion1">
+                                        <span class="titu">{% trans 'Text' %}</span>
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header " for="id_texto_n2">{% trans 'Text' %} n2</label>
+                                            <div class=" ">
+                                                <input class=" form-control" id="texto_n2_resp" maxlength="300"
+                                                       name="texto_n2"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui center aligned segment opcion2">
+                                    <div class="ui button opcion opcion2">
+                                        <img src="https://maxcdn.icons8.com/Color/PNG/24/Files/video_file-24.png">
+                                        <div class="form-group">
+                                            <div class="ui mini button yellow reset" style="float: left"><i
+                                                    class="fa fa-arrow-left"></i></div>
+                                            <label class="control-label ui tiny header" for="id_media_n2">Media n2</label>
+                                            <div class=" ">
+                                                <input id="media_n2_resp" multiple="multiple" name="media_n2" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui centerd grid" style="margin-top: 20px">
+                    <button id="canceld" class="ui button red"><i class="fa fa-times"></i>{% trans 'Cancel' %}</button>
+                    <button id="guardarResp" class="ui button green" href="{% url 'crear_respuesta' %}"><i class="fa fa-save fa-fw"></i>{% trans 'Save' %}</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <a href="" onClick="history.go(-1);" class="btn btn-warning"><i
+                class="fa fa-arrow-left fa-fw"></i> {% trans 'Back' %}</a>
+
+        <button id="submit" name="submit" class="btn btn-primary" type="submit" value="siguiente"><i
+                class="fa fa-save fa-fw"></i>Save and continue
+        </button>
+    </form>
+
+
+{% endblock %}

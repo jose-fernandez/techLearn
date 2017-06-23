@@ -1,0 +1,34 @@
+.form-group{
+    display: none;
+}
+
+input[type="text"], textarea {
+
+  color : #000000;
+
+}
+button{
+    display: table-cell;
+}
+
+
+.f1{
+    height: 150px;
+}
+.f2{
+    height: 295px;
+}
+
+div{
+    justify-content:center;
+    align-items:center;
+}
+
+input[type=file]{
+    width: 100%;
+}
+
+textarea{
+    width: 100%;
+    resize: none;
+}

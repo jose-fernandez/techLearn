@@ -1,0 +1,193 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link href="{{ STATIC_URL }}flat_admin/dist/lib/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/semantic.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}semantic_ui/components/icon.min.css"/>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}plantillas/p3/p3.css'/>
+
+
+    <title>Title</title>
+</head>
+<body>
+<div class="ui container">
+<input type="hidden" id="sinVideo" value="{{ ejercicio.sinVideo }}">
+    {%  if ejercicio.sinVideo == 1 %}
+        <script>
+            window.parent.$('#mediaContent').hide('slow');
+            window.parent.$("#ejer").removeAttr('class');
+            window.parent.$('#ejer').attr('class', ' sixteen wide column');
+        </script>
+    {% endif %}
+    <div id="inicio" class="padded segment ui drag_panel">
+        {% for rec in ejercicio.recursosP3.all %}
+            {% for text in rec.textos.all %}
+                {% if text.tipo == 5 %}
+                    <div class="ui label drag draggable" id="{{ text.id }}"><p>{{ text.origen }}</p></div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% for rec in ejercicio.recursosP3.all %}
+
+        <div class="padded segment ui">
+            <div class="ui grid contenedor">
+
+
+                {% for text in rec.textos.all %}
+                    {% if text.tipo == 1 %}
+                        <p>{{ text.origen }}</p>
+                    {% elif text.tipo == 2 %}
+                        <audio controls>
+                            <source src="/{{ text.audio.url }}" type="audio/{{ text.audio.extension }}">
+                        </audio>
+                    {% elif text.tipo == 3 %}
+                        <div class="ui form">
+
+                                <input type="text" class="resp" name="resp" id="resp{{ text.id }}"
+                                       value="{{ text.origen }}"
+                                       style="display: none">
+
+                                <div class="field">
+                                    <input type="text" class="fill" name="fill" id="{{ text.id }}" placeholder="">
+                                </div>
+                        </div>
+                        <div class="hint1"><i id="{{ text.id }}"
+                                                          class="hint fa fa-question-circle fa-2x"
+                                                          aria-hidden="true"></i></div>
+                        <div id="dialog{{ text.id }}_n1" class="dialog n1" title="{% trans 'A little help' %}" style="display: none">
+                            {% if text.texto_n1 %}
+                                <p id="{{ text.id }}">{{ text.texto_n1 }}</p>
+                            {% else %}
+                                {% if text.media_n1.extension == 'png' or text.media_n1.extension == 'jpg' or text.media_n1.extension == 'gif' %}
+                                    <img src="/{{ text.media_n1.url }}">
+                                {% elif text.media_n1.extension == 'ogg' or text.media_n1.extension == 'webm' or text.media_n1.extension == 'mp4' %}
+                                    <video class="responsive-video" preload="auto" controls data-setup='{}'
+                                           style="max-width: 100%;height: auto;">
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="video/{{ text.media_n1.extension }}"/>
+                                    </video>
+                                {% elif text.media_n1.extension == 'mp3' or text.media_n1.extension == 'wav' %}
+                                    <audio controls>
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="audio/{{ text.media_n1.extension }}">
+                                    </audio>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% elif text.tipo == 4 %}
+                        <div class="ui form">
+                                <div class="field">
+                                    <select class="select" id="{{ text.id }}">
+                                        <option value="" disabled selected>{% trans 'Choose' %}</option>
+                                        <option class="correcta" value="1">{{ text.origen }}</option>
+                                        <option value="2">{{ text.opcion1 }}</option>
+                                        <option value="3">{{ text.opcion2 }}</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="hint1"><i id="{{ text.id }}"
+                                                          class="hint fa fa-question-circle fa-2x"
+                                                          aria-hidden="true"></i></div>
+                        <div id="dialog{{ text.id }}_n1" class="dialog n1" title="{% trans 'A little help' %}" style="display: none">
+                            {% if text.texto_n1 %}
+                                <p id="{{ text.id }}">{{ text.texto_n1 }}</p>
+                            {% else %}
+                                {% if text.media_n1.extension == 'png' or text.media_n1.extension == 'jpg' or text.media_n1.extension == 'gif' %}
+                                    <img src="/{{ text.media_n1.url }}">
+                                {% elif text.media_n1.extension == 'ogg' or text.media_n1.extension == 'webm' or text.media_n1.extension == 'mp4' %}
+                                    <video class="responsive-video" preload="auto" controls data-setup='{}'
+                                           style="max-width: 100%;height: auto;">
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="video/{{ text.media_n1.extension }}"/>
+                                    </video>
+                                {% elif text.media_n1.extension == 'mp3' or text.media_n1.extension == 'wav' %}
+                                    <audio controls>
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="audio/{{ text.media_n1.extension }}">
+                                    </audio>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% elif text.tipo == 5 %}
+                        <div class="ui drop" id="{{ text.id }}"></div>
+
+                        <div class="hint1"><i id="{{ text.id }}" class="hint fa fa-question-circle fa-2x" aria-hidden="true"></i></div>
+                        <div id="dialog{{ text.id }}_n1" class="dialog n1" title="{% trans 'A little help' %}" style="display: none">
+                            {% if text.texto_n1 %}
+                                <p id="{{ text.id }}">{{ text.texto_n1 }}</p>
+                            {% else %}
+                                {% if text.media_n1.extension == 'png' or text.media_n1.extension == 'jpg' or text.media_n1.extension == 'gif' %}
+                                    <img src="/{{ text.media_n1.url }}">
+                                {% elif text.media_n1.extension == 'ogg' or text.media_n1.extension == 'webm' or text.media_n1.extension == 'mp4' %}
+                                    <video class="responsive-video" preload="auto" controls data-setup='{}'
+                                           style="max-width: 100%;height: auto;">
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="video/{{ text.media_n1.extension }}"/>
+                                    </video>
+                                {% elif text.media_n1.extension == 'mp3' or text.media_n1.extension == 'wav' %}
+                                    <audio controls>
+                                        <source src="/{{ text.media_n1.url }}"
+                                                type="audio/{{ text.media_n1.extension }}">
+                                    </audio>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% elif text.tipo == 6 %}
+                        <div class="ui row"></div>
+
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endfor %}
+    <div id="dialog_n2" class="dialog_n2" title="{% trans 'A little help' %}" style="display: none">
+        {% for rec in ejercicio.recursosP3.all %}
+            {% for text in rec.textos.all %}
+                <div class="pista2_{{ text.id }}" style="display: none">
+                    {% if text.texto_n2 %}
+                        <p id="{{ text.id }}">{{ text.texto_n2 }}</p>
+                    {% else %}
+                        {% if text.media_n2.extension == 'png' or text.media_n2.extension == 'jpg' or text.media_n2.extension == 'gif' %}
+                            <img src="/{{ text.media_n2.url }}" width="200">
+                        {% elif text.media_n2.extension == 'ogg' or text.media_n2.extension == 'webm' or text.media_n2.extension == 'mp4' %}
+                            <video class="responsive-video" preload="auto" controls data-setup='{}'
+                                   style="max-width: 100%;height: auto;">
+                                <source src="/{{ text.media_n2.url }}"
+                                        type="video/{{ text.media_n2.extension }}"/>
+                            </video>
+                        {% elif text.media_n2.extension == 'mp3' or text.media_n2.extension == 'wav' %}
+                            <audio controls>
+                                <source src="/{{ text.media_n2.url }}"
+                                        type="audio/{{ text.media_n2.extension }}">
+                            </audio>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <button id="corregir_btn" class="ui teal  large button">Ok</button>
+    </div>
+    <div id="dialogV" class="dialog-confirm" title="Good job!"
+         style="display: none">{% trans 'Well done, you have finished this exercise.' %}</div>
+</div>
+
+
+<script type="text/javascript" src="{{ STATIC_URL }}flat_admin/dist/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}semantic_ui/semantic.js"></script>
+<script src="{{ STATIC_URL }}plantillas/p3/p3.js"></script>
+
+</body>
+</html>

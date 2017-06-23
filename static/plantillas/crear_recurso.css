@@ -1,0 +1,20 @@
+.form-group{
+    display: none;
+}
+
+input[type=file]{
+    width: 100%;
+}
+
+input[type=text]{
+    line-height: 2em;
+}
+
+.row{
+    height: 200px;
+}
+
+textarea{
+    width: 100%;
+    resize: none;
+}

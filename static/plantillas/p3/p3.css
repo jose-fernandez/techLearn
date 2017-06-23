@@ -1,0 +1,48 @@
+body {
+	padding:5px;
+    background:darkslategray;
+	line-height: 1.5em;
+    font-size: 12px;
+}
+
+.row{
+    margin-left: 10px;
+    padding-top:10px;
+}
+
+img{
+    width:100%;
+}
+
+.yellow{
+    background: #F7EA95;
+}
+
+select{
+    min-width: 100px;
+}
+
+.hint{
+    cursor: pointer;
+}
+.contenedor{
+    padding-top: 10px;
+    z-index: -1;
+}
+
+.drag{
+    cursor: pointer;
+}
+#inicio{
+    border: 2px dashed darkgray;
+}
+
+.drop{
+    width: 80px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px dashed #1B1C1D;
+    background: #d9d9d9;
+    border-radius: 5px;
+}
